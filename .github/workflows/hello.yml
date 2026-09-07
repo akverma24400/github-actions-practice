@@ -1,0 +1,17 @@
+# Nmae of the workflow
+name: hello-workflow
+
+# triger the workflow on push to main branch
+on:
+  push:
+    branches:
+      - main
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: say hello
+        run: echo "Hello! from Github Actions"
