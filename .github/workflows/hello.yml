@@ -34,5 +34,5 @@ jobs:
           echo "runner OS: ${{runner.os}}"
 
 # Breaking the code intentionally to see the failure in the workflow
-      - name: breaking the code
-        run: exit 1
+#     - name: breaking the code
+#       run: exit 1
