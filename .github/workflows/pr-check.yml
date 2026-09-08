@@ -17,8 +17,7 @@ jobs:
           echo "Pull request triggered sucessfully"
           echo "branch name: ${{ github.head_ref }}"
 
-      - name: Print Current Date
-        run: date
+
       
       - name: Print runner OS
         run: |
