@@ -1,0 +1,17 @@
+name: pull request-check
+on:
+  pull_request:
+    branches: 
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu:latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: print PR info
+        run: |
+          echo "Pull request triggered successfully"
+          echo "branch name: ${{ github.head_ref }}"
