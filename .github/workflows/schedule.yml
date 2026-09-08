@@ -1,0 +1,17 @@
+name: schadule-workflow
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight UTC
+
+jobs:
+  schedule-jon:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: print message
+        run: echo "This is a scheduled workflow running at midnight UTC"
+
+      - name: print date and time
+        run: date
