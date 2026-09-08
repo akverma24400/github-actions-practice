@@ -1,0 +1,23 @@
+name: pull request check
+ 
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr_check:
+    runs-on: ubuntu:latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: Print PR information
+        run: |
+          echo "Pull request triggered sucessfully"
+          echo "branch name: ${{ github.head_ref }}"
+
+      - name: Print Current Date
+        run: date
+
+      
