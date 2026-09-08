@@ -3,6 +3,8 @@ on:
   schedule:
     - cron: '0 0 * * *' # Runs every day at midnight UTC
 
+  workflow_dispatch:
+
 jobs:
   schedule-jon:
     runs-on: ubuntu-latest
