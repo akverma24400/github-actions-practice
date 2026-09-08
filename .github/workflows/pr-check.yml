@@ -20,4 +20,6 @@ jobs:
       - name: Print Current Date
         run: date
       
-      
+      - name: Print runner OS
+        run: |
+            echo "Runner OS: ${{ runner.os }}"
