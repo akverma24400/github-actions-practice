@@ -3,9 +3,9 @@ name: hello-workflow
 
 # triger the workflow on push to main branch
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+
+  
 jobs:
   greet:
     runs-on: ubuntu-latest
