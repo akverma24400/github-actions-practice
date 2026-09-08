@@ -17,6 +17,8 @@ jobs:
           echo "Pull request triggered sucessfully"
           echo "branch name: ${{ github.head_ref }}"
 
-      
 
       
+      - name: Print runner OS
+        run: |
+            echo "Runner OS: ${{ runner.os }}"
