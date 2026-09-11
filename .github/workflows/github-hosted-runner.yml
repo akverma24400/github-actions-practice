@@ -14,6 +14,12 @@ jobs:
         run: hostname
       - name: current user running the job
         run: whoami
+      - name: print software versions
+        run: |
+          echo "Docker version: $(docker --version)"
+          echo "Python version: $(Python --version)"
+          echo "Node version: $(node --version)"
+          echo "Git version: $(git --version)"
 
   windows-runner: 
     runs-on: windows-latest
