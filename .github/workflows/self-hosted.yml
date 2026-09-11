@@ -5,7 +5,10 @@ on:
 
 jobs:
   self-hosted-job:
-    runs-on: self-hosted
+    runs-on: 
+      - self-hosted
+      - linux
+      - dev-runner
 
     steps:
       - name: check self-hosted runner information
