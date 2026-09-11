@@ -1,0 +1,19 @@
+name: self-hosted-runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  self-hosted-job:
+    runs-on: self-hosted
+
+    steps:
+      - name: check self-hosted runner information
+        run: |
+          echo "Host-name: $HOSTNAME"
+          echo "Current User: $(whoami)"
+          echo "working directory: $PWD"
+          echo "welcome to self-hosted runner" > welcome.txt
+
+      - name: print welcome message
+        run: cat welcome.txt
