@@ -14,11 +14,11 @@ jobs:
 
       - name: verify report file
         run: |
-          la -l reports
+          ls -l reports
           cat reports/day-44-report.txt
 
       - name: upload artifact
-        run: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: day-44-report
           path: reports/day-44-report.txt
