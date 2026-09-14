@@ -1,0 +1,24 @@
+name: Upload Artifact Demo
+on:
+  workflow_dispatch
+
+jobs:
+  artifact-uploadd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Repo folder and file
+        run: |
+          mkdir reports
+          echo "Github-Actions Artifact Demo" > reports/day-44-report.txt
+          echo "Day-44 completed Successfully!!!" >> reports/day-44-report.txt
+
+      - name: verify report file
+        run: |
+          la -l reports
+          cat reports/day-44-report.txt
+
+      - name: upload artifact
+        run: actions/upload-artifact@v4
+        with:
+          name: day-44-report
+          path: reports/day-44-report.txt
