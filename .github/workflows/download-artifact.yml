@@ -1,6 +1,7 @@
 name: Download artifacts
 on:
-  workflow_call:
+  workflow_dispatch:
+  
 jobs:
   create-report:
     runs-on: ubuntu-latest
