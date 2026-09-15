@@ -3,6 +3,11 @@ on:
   push: 
     branches:
       - main
+      - feature/**
+
+  pull_request:
+    branches:
+      - main
 
 jobs:
   docker-build:
@@ -41,4 +46,11 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/todo:latest
             ${{ secrets.DOCKER_USERNAME }}/todo:sha-${{ env.SHORT_SHA }}
 
+      - name: Build Docker Image Only
+        if: github.ref_name != 'main'
+        uses: docker/build-push-action@v6
+        with:
+          context: ./todo-list-app
+          push: false
+          tag: todo:test
 
