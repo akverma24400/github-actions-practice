@@ -1,4 +1,4 @@
-name: Cache Demo
+name: Dependency Cache Demo
 
 on:
   workflow_dispatch:
@@ -11,21 +11,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          node-version: 20
+          python-version: "3.12"
 
-      - name: Cache npm dependencies
+      - name: Cache pip downloads
+        id: pip-cache
         uses: actions/cache@v4
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-py312-${{ hashFiles('requirements.txt') }}
+
+      - name: Show cache status
+        env:
+          CACHE_HIT: ${{ steps.pip-cache.outputs.cache-hit }}
+        run: echo "Cache hit = $CACHE_HIT"
 
       - name: Install dependencies
-        run: npm install
+        run: time python -m pip install -r requirements.txt
 
-      - name: Run tests
-        run: npm test
+      - name: Verify installation
+        run: python -m pytest --version
