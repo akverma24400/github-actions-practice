@@ -1,22 +1,19 @@
-name: Run Tests in CI
+name: Run Shell Tests in CI
 
 on:
+  push:
+    paths:
+      - "scripts/test-add.sh"
+      - ".github/workflows/run-tests.yml"
   workflow_dispatch:
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
+  test:
+    runs-on: ubuntu-latest
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                node-version: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-            - name: Install Dependencies
-              run: npm install
-
-            - name: Run Tests
-              run: npm test
+      - name: Run Shell tests
+        run: bash scripts/test-add.sh
