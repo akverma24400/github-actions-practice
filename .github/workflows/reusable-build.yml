@@ -18,6 +18,10 @@ on:
       docker_token:
         required: true
 
+    outputs:              # Map the workflow outputs to job outputs
+      build_version:
+        value: ${{ jobs.build.outputs.build_version }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -44,9 +48,9 @@ jobs:
             exit 1
           fi
 
-      # - name: Generate Build Version
-      #   id: set-version
-      #   run: |
-      #     BUILD_VERSION="v1.0-${GITHUB_SHA::7}"
-      #     echo "build_version=$BUILD_VERSION" >> "$GITHUB_OUTPUT"
-      #     echo "Generated Build Version: $BUILD_VERSION"
+      - name: Generate Build Version
+        id: set-version
+        run: |
+          BUILD_VERSION="v1.0-${GITHUB_SHA::7}"
+          echo "build_version=$BUILD_VERSION" >> "$GITHUB_OUTPUT"
+          echo "Generated Build Version: $BUILD_VERSION"

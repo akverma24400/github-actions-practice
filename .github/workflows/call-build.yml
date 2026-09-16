@@ -13,3 +13,10 @@ jobs:
     secrets:
       docker_token: ${{ secrets.DOCKER_TOKEN }}
 
+  print-version:
+    runs-on: ubuntu-latest
+    needs: call-reusable-build
+    steps:
+      - name: Print Build Version
+        run: |
+          echo "Build Version: ${{ needs.build.outputs.build_version }}"
