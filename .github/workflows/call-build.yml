@@ -1,4 +1,4 @@
-name: Call-build
+name: Call-build-practice
 on:
   push:
     branches:
@@ -13,4 +13,3 @@ jobs:
     secrets:
       docker_token: ${{ secrets.DOCKER_TOKEN }}
 
-      
