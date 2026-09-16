@@ -1,8 +1,9 @@
 name: reusable-build
+
 on:
   workflow_call:
     inputs:
-      app_name: 
+      app_name:
         description: "Application Name"
         required: true
         type: string
@@ -14,35 +15,34 @@ on:
         type: string
 
     secrets:
-      docker_tocken:
+      docker_token:
         required: true
-
-    # outputs:              # Map the workflow outputs to job outputs
-    #   build_version:
-    #     value: ${{ jobs.build.outputs.build_version }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    outputs:
-      build_version: ${{ steps.set-version.outputs.build_version }}
-
     steps:
-      - name: checkout repo
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: print build info
+      - name: Print build info
+        env:
+          APP_NAME: ${{ inputs.app_name }}
+          DEPLOY_ENV: ${{ inputs.environment }}
         run: |
-          echo "Building ${{ inputs.app_name }} for ${{ inputs.environment }}"
+          echo "Building $APP_NAME for $DEPLOY_ENV"
 
       - name: Verify Docker Token Status
+        env:
+          DOCKER_TOKEN: ${{ secrets.docker_token }}
         run: |
-          if [ -n "${{ secrets.docker_token }}" ]; then
-               echo "Docker token is set: true"
-            else
-               echo "Docker token is set: false"
-            fi
+          if [ -n "$DOCKER_TOKEN" ]; then
+            echo "Docker token is set: true"
+          else
+            echo "Docker token is set: false"
+            exit 1
+          fi
 
       # - name: Generate Build Version
       #   id: set-version
