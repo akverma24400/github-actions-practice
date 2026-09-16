@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: checkout repo
-        uses: actions/checkout@v4x
+        uses: actions/checkout@v4
 
       - name: print build info
         run: |
