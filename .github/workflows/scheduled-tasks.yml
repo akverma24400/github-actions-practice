@@ -1,0 +1,26 @@
+name: Schedule Task
+on: 
+  schedule:
+    - cron: "30 2 * * 1" # every Monnday at 2:30 AM
+    - cron: "0 */6 * * *"  # after every 6 hrs 
+  workflow_dispatch:
+
+jobs:
+  Schedule-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Execution Detais
+        run: |
+          echo "Current UTC time: $(date -u)"
+          echo "Runner: ${{ runner.os }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Event: ${{ github.event_name }}"
+
+      - name: Print triger details
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+                  echo "Workflow was triggered manually"
+                else
+                  echo "Workflow was triggered by schedule"
+                  echo "Cron: ${{ github.event.schedule }}"
+                fi
